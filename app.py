@@ -5,6 +5,7 @@ from rembg import remove  # Para remover el fondo de las imágenes
 from PIL import Image  # Para manipular imágenes
 import io  # Para manejar datos en memoria
 import base64  # Para codificar imágenes en base64 para SVG
+import os # <-- IMPORTA 'os' AQUI
 
 # Crear la aplicación Flask
 app = Flask(__name__)
@@ -93,5 +94,6 @@ def remove_background():
 
 # Ejecutar la aplicación si se ejecuta directamente
 if __name__ == '__main__':
-    # Ejecutar en todas las interfaces, puerto 3000, con modo debug
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    # Obtener el puerto de las variables de entorno de Render
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
